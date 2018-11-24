@@ -1,9 +1,15 @@
 import React from "react";
+import LoginCard from "../../components/LoginCard";
+import NavBarPage from "../../components/NavbarPage";
+import "./Login.css";
 
 const Login = () => {
     return(
         <div>
-            hello
+           <NavBarPage />
+    <div className="loginCard">
+    <LoginCard/>
+    </div>
         </div>
     )
 }
