@@ -3,6 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
+const alpha = require('alphavantage')({ key: 'N0P025QLK3BB7DUQ'});
 
 // require models
 const db = require("./models");
@@ -10,40 +11,29 @@ const db = require("./models");
 // connect Mongoose
 mongoose.connect("mongodb://localhost/newsStocksDB", { useNewUrlParser: true });
 
-// NewsAPI
-const NewsAPI = require('newsapi');
-// need to env variable the token!
-const newsapi = new NewsAPI('b1c5821e0a304d498a98a66ec9a01eb4');
-
-for (let pageNum = 1; pageNum < 11; pageNum++) {
-  newsapi.v2.everything({
-    q: 'tesla',
-    // sources: 'bbc-news,the-verge',
-    // domains: 'bbc.co.uk, techcrunch.com',
-    // from: '2007-12-01',
-    // to: '2017-12-12',
-    sortBy: 'relevancy',
-    language: 'en', 
-    pageSize: 100,
-    page: pageNum
-  })
-  .then(response => {
-    for (let articleNum = 0; articleNum < 100; articleNum++) {
-      db.Article.create({
-        title: response.articles[articleNum].title,
-        publishedDate: response.articles[articleNum].publishedAt
+// temporary, once I move it to a controller 
+// this will come from req.params
+const symbol = ['TSLA', 'MSFT', 'AAPL', 'AMZN'];
+symbol.map(key => {
+  alpha.data
+  .daily(key, 'full')
+  .then(data => {
+    const dataKeys = Object.keys(data['Time Series (Daily)']);
+    dataKeys.map(key => {
+      let oneDay = data['Time Series (Daily)'][key];
+      db.Stock.create({
+        symbol: data['Meta Data']['2. Symbol'],
+        date: key,
+        open: oneDay['1. open'],
+        high: oneDay['2. high'],
+        low: oneDay['3. low'],
+        close: oneDay['4. close']
       })
-      .then(newArticle => console.log(`New article created: ${newArticle}`))
-      .catch(err => console.log(err));
-    }
-    /*
-      {
-        status: "ok",
-        articles: [...]
-      }
-    */
+      .then(newData => console.log(`Added new data point ${newData}`))
+      .catch(err => console.log(`Error ${err}`));
+    });
   });
-}
+});
 
 
 // Define middleware here
