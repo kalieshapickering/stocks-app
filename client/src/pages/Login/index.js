@@ -6,9 +6,9 @@ import "./Login.css";
 const Login = () => {
     return(
         <div>
-           <NavBarPage />
+    <NavBarPage />
     <div className="loginCard">
-    <LoginCard/>
+    <LoginCard />
     </div>
         </div>
     )

@@ -3,11 +3,11 @@ import "./NavbarPage.css";
 import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa } from "mdbreact";
 
 class NavbarPage extends Component {
-  state = {
-    isOpen: false
-  };
+  // state = {
+  //   isOpen: false
+  // };
 
-  toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
+  // toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
 
   render() {
     return (
@@ -17,11 +17,11 @@ class NavbarPage extends Component {
             <strong className="white-text">Stock Predictor</strong>
           </NavbarBrand>
           <NavbarToggler
-            onClick={this.toggleCollapse}
+            // onClick={this.toggleCollapse}
           />
           <Collapse
             id="navbarCollapse3"
-            isOpen={this.state.isOpen}
+            // isOpen={this.state.isOpen}
             navbar
           >
         
@@ -45,8 +45,8 @@ class NavbarPage extends Component {
                     <Fa icon="user" />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-default" right>
-                    <DropdownItem href="#!">Login</DropdownItem>
-                    <DropdownItem href="#!">Register</DropdownItem>
+                    <DropdownItem href="/login">Login</DropdownItem>
+                    <DropdownItem href="/register">Register</DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>

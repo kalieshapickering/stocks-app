@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Input, Button} from 'mdbreact';
+import { Container, Row, Col, Input, Button, Card, CardBody} from 'mdbreact';
 
 class LoginCard extends Component  {
   render() {
     return(
       
-        <Container className="mt-5">
-        <DocsLink
-          title="Forms"
-          href="https://mdbootstrap.com/docs/react/forms/basic/"
-        />
+        <Container>
+  
         <Row>
           <Col md="6">
+          <Card>
+            <CardBody>
             <form>
               <p className="h5 text-center mb-4">Sign in</p>
               <div className="grey-text">
@@ -37,6 +36,8 @@ class LoginCard extends Component  {
                 <Button>Login</Button>
               </div>
             </form>
+            </CardBody>
+            </Card>
           </Col>
         </Row>
       </Container>
