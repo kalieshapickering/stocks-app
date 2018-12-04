@@ -35,7 +35,10 @@ const StockPriceSchema = new Schema({
   mom_close: Number,
   stoch_slowd: Number,
   stoch_slowk: Number,
-  t3: Number
+  t3_open: Number,
+  t3_high: Number,
+  t3_low: Number,
+  t3_close: Number,
 });
 
 let StockPrice = mongoose.model("StockPrice", StockPriceSchema);
