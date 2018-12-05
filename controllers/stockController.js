@@ -1,6 +1,7 @@
 const db = require("../models");
 const alpha = require('alphavantage')({ key: 'N0P025QLK3BB7DUQ'});
 
+// * BEGIN MODULE.EXPORTS API ROUTES *
 module.exports = {
   
   scrape: (req, res) => {
@@ -34,6 +35,8 @@ module.exports = {
       .catch(err => res.json(err));
   }
 }
+
+// * END MODULE.EXPORTS API ROUTES *
 
 getStockPrices = (symbol, res) => {
   alpha.data
