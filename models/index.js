@@ -1,3 +1,5 @@
 module.exports = {
-  Stock: require('./StockPrice')
+  Stock: require('./StockPrice'),
+  Article: require('./Article'),
+  Comment: require('./Comment')
 };

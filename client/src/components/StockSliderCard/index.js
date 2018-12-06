@@ -1,23 +1,34 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardText } from "mdbreact";
+import { Container, Row, Col, Card, CardBody, CardTitle } from "mdbreact";
+import StockChart from "../StockChart";
 
-class StockCard extends Component{
-    render() {
-        return(
-            <div>
+class StockSliderCard extends Component {
+    render () {
+        return (
+            <div className="stockSlider">
+    <Container>
+        <Row>
+            <Col>
             <Card>
-                <CardTitle>
-                    <strong>{props.name}</strong>
+                <Col>
+<StockChart/>
+</Col>
+<Col md="4">
+            <CardTitle>
+                Stock Name
                 </CardTitle>
-                <CardText>
-                    {props.price}
-                    </CardText>
-                    {/* graph of trend for the day */}
+                <CardBody>
+                    stock price
+                     </CardBody>
+                     </Col>
             </Card>
-                </div>
+            </Col>
+            
+            </Row>
+        </Container>
+            </div>
         )
-    }
 }
- 
+} 
 
-export default StockCard;
+export default StockSliderCard;

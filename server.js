@@ -3,7 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
-// const routes = require('./routes');
+const routes = require('./routes');
 
 
 // connect Mongoose
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // use route file
-// app.use(routes);
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);

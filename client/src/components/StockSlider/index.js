@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import "./StockSlider.css";
-// import { Container } from "mdbreact";
+import { Row, Col } from "mdbreact";
+import StockSliderCard from "../StockSliderCard";
 
 class StockSlider extends Component {
     render () {
         return (
-            <div>
-    
-    <div className="stockSlider">
-    <p>Hello</p>
-    </div>
+            <div className="stockSlider">
+        <Row>
+            <Col>
+            <StockSliderCard/>
+            </Col>
+            <Col>
+            <StockSliderCard/>
+            </Col>
+            <Col>
+            <StockSliderCard/>
+            </Col>
+            </Row>
             </div>
         )
 }
