@@ -3,6 +3,9 @@ import "./NavbarPage.css";
 import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa } from "mdbreact";
 
 class NavbarPage extends Component {
+  state = {
+    search : []
+}
 
 
   // state = {
@@ -36,7 +39,7 @@ class NavbarPage extends Component {
                       type="text"
                       placeholder="Search"
                       value={this.state.search}
-                      onChange={this.handleInputChange}
+                      // onChange={this.handleInputChange}
                       name="search"
                     />
                   </div>
