@@ -44,7 +44,7 @@ normalizeData = data => {
             standardDeviation: standardDeviationForIndicator
         }
     })
-
+    console.log(normalizationHelpers)
     console.log("\n\nProcessing data to be normalized\n\n")
     let normalizedData = []
     // go through each dataset to be replaced by its normalized version
@@ -54,13 +54,13 @@ normalizeData = data => {
         // loop through each specific indicator to modify the current dataset
         specificIndicators.forEach(indicator => {
             // get the current indicators average and standard deviation
-            normalizingHelpersForIndicator = normalizationHelpers[indicator]
+            let normalizingHelpersForIndicator = normalizationHelpers[indicator]
             normalizedDataset[indicator] = (dataset[indicator] - normalizingHelpersForIndicator.average) / normalizingHelpersForIndicator.standardDeviation
         })
         normalizedData.push(normalizedDataset)
     })
 
-    return normalizedData
+    return { normalizedData, normalizationHelpers }
 }
 
 const filterObjectArrayByKeys = (objArray, keys) => {
@@ -78,20 +78,19 @@ const filterObjectArrayByKeys = (objArray, keys) => {
 const indicators = ['sma', 'ema', 'rsi', 'mom', 't3', 'macd']
 
 const scaleByMax = (arr) => {
-    let prices = arr.map(actual => actual.low)
-    console.log("prices")
-    console.log(prices)
-    let max = Math.max(...prices)
-    console.log("max")
-    console.log(max)
+    let highPrices = arr.map(actual => actual.high)
+    let max = Math.max(...highPrices)
     scaled = arr.map(output => {
-        return { low: output.low / max }
+        let outputLabel = {}
+        intervals.forEach(interval => {
+            outputLabel[interval] = output[interval] / max
+        })
+        return outputLabel
     })
-    return scaled
+    return { scaled, max }
 }
 
 module.exports = {
-
     trainModelForStock: (req, res) => {
         const companySymbol = req.params.symbol.toUpperCase()
         console.log(companySymbol)
@@ -108,15 +107,13 @@ module.exports = {
                         return (Boolean(dataset["macd_low"]) && Boolean(dataset["t3_low"]) && Boolean(dataset["mom_low"]) && Boolean(dataset["rsi_low"]) && Boolean(dataset["ema_low"]) && Boolean(dataset["sma_low"]))
                     })
                     console.log(`${filteredResponse.length} of ${companySymbol}'s datasets include the majority of the indicators.`)
-                    const normalizedInput = filterObjectArrayByKeys(filteredResponse, intervals)
-                    console.log(intervals)
-                    console.log("Input length")
-                    console.log((normalizedInput[0]))
-                    let outputs = filterObjectArrayByKeys(filteredResponse, ["low"])
-                    outputs = scaleByMax(outputs)
-                    console.log(Object.keys(normalizedInput[0]).length)
-                    console.log("output length")
-                    console.log(outputs)
+                    const normalizeDataOutputs = normalizeData(filteredResponse)
+                    const normalizedInput = normalizeDataOutputs.normalizedData
+                    const helpers = normalizeDataOutputs.normalizationHelpers
+                    let outputs = filterObjectArrayByKeys(filteredResponse, intervals)
+                    const scaleByMaxOutput = scaleByMax(outputs)
+                    const max = scaleByMaxOutput.max
+                    outputs = scaleByMaxOutput.scaled
                     let inputOutputArray = []
                     if (normalizedInput.length === outputs.length) {
                         for (let i = 0; i <= normalizedInput.length - 1; i++) {
@@ -128,29 +125,32 @@ module.exports = {
                     console.log("\n\nBeginning training...\n\n")
                     const config = {
                         hiddenLayers: [64, 64],
-                        learningRate: 0.01,
-                        activation: "sigmoid",
+                        learningRate: 0.001,
+                        activation: "relu",
                         binaryThresh: 0.5,
-                        // inputSize: 4,
-                        // outputSize: 1
+                        errorThresh: 0.05
                     }
 
                     const net = new brain.NeuralNetwork(config)
-                    // console.log(net)
-                    net.train(inputOutputArray, { log: true, iterations: 500 })
-                    console.log(":)")
-                    // net.train([{input: { r: 0.03, g: 0.7, b: 0.5 }, output: { black: 1 }},
-                    //     {input: { r: 0.16, g: 0.09, b: 0.2 }, output: { white: 1 }},
-                    //     {input: { r: 0.5, g: 0.5, b: 1.0 }, output: { white: 1 }}])
-                    // net.trainAsync(inputOutputArray, {log: true, logPeriod: 1}).then(res => {
-                    //     console.log("Net after train")
-                    //     console.log(net)
-                    //     console.log(res)
-                    //     console.log(`Trained model at ${res.iterations} iterations with ${res.error} error`)
-                    //     console.log(res.error)
-                    // }).catch(err => console.log(err))
+                    net.trainAsync(inputOutputArray, { log: true, iterations: 100 }).then((nnRes) => {
+                        console.log(`\n\nDone in ${nnRes.iterations} iterations and with ${nnRes.error * 100}% error\n\n`)
+                        const serializedNet = JSON.stringify(net.toJSON())
 
-                    console.log(":(")
+                        let documentToAdd = {
+                            symbol: companySymbol,
+                            date: new Date(),
+                            max: max,
+                            NeuralNet: serializedNet   
+                        }
+                        Object.keys(helpers).map(helperKey => {
+                            documentToAdd[helperKey] = Object.values(helpers[helperKey])
+                        })
+                        console.log(documentToAdd)
+                        db.NNModel.findOneAndUpdate({ 
+                            symbol: companySymbol,
+                            date: new Date().toLocaleDateString()
+                        }, documentToAdd, { upsert: true }).then(result => res.json(result)).catch(err => console.log(err))
+                    })
                 }
             })
             .catch(err => res.json(err))
