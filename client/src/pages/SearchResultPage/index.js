@@ -1,31 +1,13 @@
 import React, {Component} from "react";
 import StockChart from "../../components/StockChart";
 import {Card, Col, Row, ListGroup, ListGroupItem, MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn} from "mdbreact";
+import SearchResultContainer from "../../components/SearchResultContainer";
+import CommentSection from "../../components/CommentSection";
 
 class SearchResultPage extends Component{
-    state = {
-        search : []
-    }
+  
 
-    // componentDidMount() {
-    
-    //     const client = webhoseio.config({token: 'bd6cde1b-cbe8-4ce2-aa82-73e6ddc91927'});
-    //     const query_params = {
-    //     "q":  "language:english",
-    //     "sort": "crawled"
-    //     }
-    //     client.query('filterWebContent', query_params)
-    //     .then(output => {
-    //         console.log(output['posts'][0]['text']); // Print the text of the first post
-    //         console.log(output['posts'][0]['published']); // Print the text of the first post publication date
-    //     console.log(output['posts']);
-    //     this.setState({newsArticles: output['posts']});
-    //     }); 
-    //     console.log(this.state);
-    // }
-    
 
-    // };
     render(){
     return(
         <div>
@@ -33,13 +15,23 @@ class SearchResultPage extends Component{
             <Card>
 <StockChart />
 </Card>
+
+<br></br>
 <Row>
     <Col md="7">
-    <ListGroup>
-       <ListGroupItem>
-           Hi
-       </ListGroupItem>
-    </ListGroup>
+    {this.props.search&&this.props.search.map(article => {
+        return(
+  <SearchResultContainer 
+    image = {article.main_image}
+    title = {article.title}
+    text = {article.text}
+    url = {article.url}
+    published = {article.published}
+    />
+        )
+    })
+   
+    }
     </Col>
 <Col md="4">
 
@@ -52,44 +44,7 @@ class SearchResultPage extends Component{
         </ListGroup>
     </Card>
     <Card>
-<MDBContainer>
-      <MDBRow>
-        <MDBCol>
-          <form>
-            <p className="h5 text-center mb-4">Leave a Comment</p>
-            <div className="grey-text">
-            <MDBInput
-                label="Your name"
-                icon="user"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <MDBInput
-                label="Type your email"
-                icon="envelope"
-                group
-                type="email"
-                validate
-                error="wrong"
-                success="right"
-              />
-                <MDBInput
-                type="textarea"
-                rows="2"
-                label="Your message"
-                icon="pencil"
-              />
-            </div>
-            <div className="text-center">
-              <MDBBtn>Submit</MDBBtn>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+<CommentSection/>
     </Card>
 </Card>
 </Col>

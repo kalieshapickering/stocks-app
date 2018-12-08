@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import "./NavbarPage.css";
-import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa } from "mdbreact";
+import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa, MDBBtn } from "mdbreact";
+
 
 class NavbarPage extends Component {
-  state = {
-    search : []
-}
-
 
   // state = {
   //   isOpen: false
@@ -32,18 +29,19 @@ class NavbarPage extends Component {
         
             <NavbarNav right>
               <NavItem>
-                <FormInline waves>
+                <form onSubmit={this.props.handleSearch}>
                   <div className="md-form my-0">
                     <input
                       className="form-control mr-sm-4"
                       type="text"
                       placeholder="Search"
-                      value={this.state.search}
-                      // onChange={this.handleInputChange}
+                      value={this.props.search}
+                      onChange={this.props.handleInputChange}
                       name="search"
                     />
+                    <MDBBtn type="submit">Search</MDBBtn>
                   </div>
-                </FormInline>
+                </form>
               </NavItem>
             </NavbarNav>
             <NavItem>

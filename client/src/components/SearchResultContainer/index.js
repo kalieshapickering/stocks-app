@@ -1,17 +1,25 @@
-import React, {Component} from "react";
-import StockChart from "../StockChart";
-import webhoseio from "webhoseio";
+import React from "react";
+import {Card, Container, ListGroup, ListGroupItem, MDBBtn} from "mdbreact";
 
 
-class SearchResultContainer extends Component {
 
-    render(){
+const SearchResultContainer = (props) =>  {
+     
+            return(
+                <Container>
+                    <Card>
+                        <ListGroup>
+                            <ListGroupItem> 
+                                <h3> {props.title}</h3>
+         <img alt="article image" src={props.main_image}/>
+        <p>{props.text.slice(0,450)}...</p>
+        <MDBBtn color="info" href={props.url}>Read More</MDBBtn> 
+        {props.published}
+                            </ListGroupItem>
+                        </ListGroup>
+                        </Card>
+                    </Container>
+            )
+    }
 
-    return(
-        <div>
-<StockChart />
-        </div>
-    )
-}
-}
 export default SearchResultContainer;
