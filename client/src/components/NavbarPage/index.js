@@ -3,6 +3,8 @@ import "./NavbarPage.css";
 import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa } from "mdbreact";
 
 class NavbarPage extends Component {
+
+
   // state = {
   //   isOpen: false
   // };
@@ -13,7 +15,7 @@ class NavbarPage extends Component {
     return (
 
       <Navbar color="indigo" dark expand="md">
-          <NavbarBrand>
+          <NavbarBrand href="/">
             <strong className="white-text">Stock Predictor</strong>
           </NavbarBrand>
           <NavbarToggler
@@ -33,7 +35,9 @@ class NavbarPage extends Component {
                       className="form-control mr-sm-4"
                       type="text"
                       placeholder="Search"
-                      aria-label="Search"
+                      value={this.state.search}
+                      onChange={this.handleInputChange}
+                      name="search"
                     />
                   </div>
                 </FormInline>

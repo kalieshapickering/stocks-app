@@ -7,16 +7,22 @@ import "./App.css";
 import Homepage from "../src/pages/Homepage";
 import Login from "../src/pages/Login";
 import Register from "../src/pages/Register";
+import SearchResultPage from "../src/pages/SearchResultPage";
+
+// Components
+import NavbarPage from "../src/components/NavbarPage";
 
 const App = () => {
 return (
 <Router>
   <div>
+  <NavbarPage />
     <Switch>
       <Route exact path="/" component={Homepage}/>
       <Route exact path="/homepage" component={Homepage} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
+      <Route exact path="/search" component={SearchResultPage} />
 
     </Switch>
     </div>

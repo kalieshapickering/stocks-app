@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import NavbarPage from "../../components/NavbarPage";
-import StockSlider from "../../components/StockSlider";
+// import StockSlider from "../../components/StockSlider";
 import NewsHeader from "../../components/NewsHeader";
 import NewsBody from "../../components/NewsBody";
 import webhoseio from "webhoseio";
@@ -34,14 +33,14 @@ class Homepage extends Component {
     render(){
         return(
             <div>
-    <NavbarPage />
-    <StockSlider />
+    {/* <StockSlider /> */}
     <NewsHeader />
     <br></br>
     
       {this.state.newsArticles.map(article => {
 return(
     <NewsBody
+    image = {article.main_image}
     title = {article.title}
     text = {article.text}
     url = {article.url}
