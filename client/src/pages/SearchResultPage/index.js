@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import StockChart from "../../components/StockChart";
-import {Card, Col, Row, ListGroup, ListGroupItem, MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn} from "mdbreact";
+import {Card, Col, Row, ListGroup, ListGroupItem} from "mdbreact";
 import SearchResultContainer from "../../components/SearchResultContainer";
 import CommentSection from "../../components/CommentSection";
 

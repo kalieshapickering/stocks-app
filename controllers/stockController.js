@@ -32,7 +32,7 @@ module.exports = {
           let filteredResponse = stockData.filter(dataset => {
             return (Boolean(dataset["macd_low"]) || Boolean(dataset["t3_low"]) || Boolean(dataset["mom_low"]) || Boolean(dataset["rsi_low"]) || Boolean(dataset["ema_low"]) || Boolean(dataset["sma_low"] || Boolean(dataset["stoch_low"])));
           })
-          res.json(filteredResponse);
+          res.redirect("/search").json(filteredResponse);
         }
       })
       .catch(err => res.json(err));

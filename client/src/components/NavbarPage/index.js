@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./NavbarPage.css";
-import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa, MDBBtn } from "mdbreact";
+import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, Dropdown, DropdownToggle, DropdownMenu,  DropdownItem, Fa, MDBBtn } from "mdbreact";
 
 
 class NavbarPage extends Component {
@@ -39,7 +39,7 @@ class NavbarPage extends Component {
                       onChange={this.props.handleInputChange}
                       name="search"
                     />
-                    <MDBBtn type="submit">Search</MDBBtn>
+                    <MDBBtn type="submit" href="/search">Search</MDBBtn>
                   </div>
                 </form>
               </NavItem>
