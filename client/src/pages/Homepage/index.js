@@ -4,6 +4,8 @@ import StockSlider from "../../components/StockSlider";
 import NewsHeader from "../../components/NewsHeader";
 import NewsBody from "../../components/NewsBody";
 import webhoseio from "webhoseio";
+// import ArticleResults from "../../components/NewsBody/NewsBodyArticleContainer";
+
 
 class Homepage extends Component {
 
@@ -23,7 +25,9 @@ class Homepage extends Component {
             console.log(output['posts'][0]['text']); // Print the text of the first post
             console.log(output['posts'][0]['published']); // Print the text of the first post publication date
         console.log(output['posts']);
+        this.setState({newsArticles: output['posts']});
         }); 
+        console.log(this.state);
     }
 
 
@@ -34,7 +38,19 @@ class Homepage extends Component {
     <StockSlider />
     <NewsHeader />
     <br></br>
-    <NewsBody />
+    
+      {this.state.newsArticles.map(article => {
+return(
+    <NewsBody
+    title = {article.title}
+    text = {article.text}
+    url = {article.url}
+    published = {article.published}
+    />
+)
+      }
+      )
+    }
             </div>
         )
     }
