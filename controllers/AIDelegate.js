@@ -155,13 +155,14 @@ module.exports = {
             .catch(err => res.json(err))
     },
 
-    // Send the client the latest neural net for a stock when they request it
+    // Send the client the latest neural net and supporting data for a stock when they request it
     sendNeuralNet(req, res) {
         const companySymbol = req.params.symbol.toUpperCase()
-        db.NeuralNet
-            .find({ symbol:companySymbol })
-            ,then(predictionData => {
-                console.log(predictionData)
+        db.NNModel
+            .find({ symbol: companySymbol })
+            .sort({ date: -1 })
+            .limit(1)
+            .then(predictionData => {
                 res.json(predictionData)
             })
     }

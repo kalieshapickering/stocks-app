@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import predictionInterface from "./utils/predictionAPI"
 
 class App extends Component {
   render() {
+    predictionInterface.getNeuralNet("TSLA", data => {
+      console.log(predictionInterface.predict(data, {sma_open: 194}))
+    })
     return (
       <div className="App">
         <div className="App-header">
