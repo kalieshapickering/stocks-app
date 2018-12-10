@@ -1,4 +1,10 @@
+import axios from "axios"
+
 const brain = window.brain
 const net = new brain.NeuralNetwork()
 
-export default net
+const predict = (symbol, cb) => {
+    axios.get(``)
+}
+
+export default predict

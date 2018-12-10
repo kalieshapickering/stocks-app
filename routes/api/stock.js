@@ -19,4 +19,9 @@ router
   .route("/train/:symbol")
   .get(AIDelegate.trainModelForStock)
 
+
+router
+  .route("/sendPredictor/:symbol")
+  .get(AIDelegate.sendNeuralNet)
+
 module.exports = router;

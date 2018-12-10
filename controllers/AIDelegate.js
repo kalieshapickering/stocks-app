@@ -1,4 +1,3 @@
-const request = require("request")
 const db = require("../models")
 const brain = require("brain.js")
 
@@ -6,24 +5,24 @@ const intervals = ['open', 'high', 'low', 'close']
 
 normalizeData = data => {
     standardDeviation = values => {
-        const avg = average(values);
+        const avg = average(values)
 
         const squareDiffs = values.map(value => {
-            const diff = value - avg;
-            const sqrDiff = diff * diff;
-            return sqrDiff;
-        });
+            const diff = value - avg
+            const sqrDiff = diff * diff
+            return sqrDiff
+        })
 
-        const avgSquareDiff = average(squareDiffs);
+        const avgSquareDiff = average(squareDiffs)
 
-        const stdDev = Math.sqrt(avgSquareDiff);
-        return stdDev;
+        const stdDev = Math.sqrt(avgSquareDiff)
+        return stdDev
     }
 
     average = data => {
         let sum = data.reduce((sum, value) => {
-            return sum + value;
-        }, 0);
+            return sum + value
+        }, 0)
 
         return sum / data.length
     }
@@ -154,5 +153,16 @@ module.exports = {
                 }
             })
             .catch(err => res.json(err))
+    },
+
+    // Send the client the latest neural net for a stock when they request it
+    sendNeuralNet(req, res) {
+        const companySymbol = req.params.symbol.toUpperCase()
+        db.NeuralNet
+            .find({ symbol:companySymbol })
+            ,then(predictionData => {
+                console.log(predictionData)
+                res.json(predictionData)
+            })
     }
 }
