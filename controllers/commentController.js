@@ -16,7 +16,8 @@ module.exports = {
       .catch(err => res.json(err));
   },
 
-  postComment: (req, res) => {
+  postComment: (req, res, next) => {
+    console.log(req);
     db.Comment.create({text: req.body.text})
       .then(dbComment => {
         return db.Article.findOneAndUpdate(

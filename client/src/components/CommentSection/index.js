@@ -34,7 +34,7 @@ class CommentSection extends Component {
             email: this.state.email,
             message: this.state.message
           })
-            .then(res => this.loadComments())
+            // .then(res => this.loadComments())
             // this.loadComments()
             .catch(err => console.log(err));
         }
