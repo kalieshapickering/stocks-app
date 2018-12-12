@@ -45,20 +45,6 @@ export default {
             neuralNetOutput.high = tempLow
         }
 
-        // Adjust for non-sense for when the opening price is higher than the predicted high or lower than the predicted low
-        if (neuralNetOutput.open > neuralNetOutput.high) {
-            neuralNetOutput.high = neuralNetOutput.open
-        } else if (neuralNetOutput.open < neuralNetOutput.low) {
-            neuralNetOutput.low = neuralNetOutput.open
-        }
-
-        // Adjust for non-sense for when the closing price is higher than the predicted high or lower than the predicted low
-        if (neuralNetOutput.close > neuralNetOutput.high) {
-            neuralNetOutput.high = neuralNetOutput.close
-        } else if (neuralNetOutput.close < neuralNetOutput.low) {
-            neuralNetOutput.low = neuralNetOutput.close
-        }
-
         // Multiply the relative values by the scale
         for (let key in neuralNetOutput) {
             neuralNetOutput[key] *= max

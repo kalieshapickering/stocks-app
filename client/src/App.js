@@ -6,7 +6,7 @@ import predictionInterface from "./utils/predictionAPI"
 class App extends Component {
   render() {
     predictionInterface.getNeuralNet("TSLA", data => {
-      console.log(predictionInterface.predict(data, {sma_open: 194}))
+      console.log(predictionInterface.predict(data, {}))
     })
     return (
       <div className="App">
