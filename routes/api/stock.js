@@ -19,4 +19,10 @@ router
   .route("/train/:symbol")
   .get(AIDelegate.trainModelForStock)
 
+// Matches with "api/stock/getPredictor/:symbol"
+// Sends a JSON-serialized neural network with supporting constants to enable prediction
+router
+  .route("/getPredictor/:symbol")
+  .get(AIDelegate.sendNeuralNet)
+
 module.exports = router;
