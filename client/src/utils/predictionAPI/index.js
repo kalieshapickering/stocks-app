@@ -27,9 +27,11 @@ export default {
         let neuralNetInput = {}
 
         Object.keys(normalizers).forEach(indicator => {
+            console.log(normalizers[indicator])
             // averages are at index 0, standard deviations are at index 1
             if (indicator in userInputs) {
                 neuralNetInput[indicator] = (userInputs[indicator] - normalizers[indicator][0]) /  normalizers[indicator][1]
+                // neuralNetInput[indicator] = userInputs[indicator]
             } else {
                 neuralNetInput[indicator] = normalizers[indicator][0]
             }

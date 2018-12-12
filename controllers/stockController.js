@@ -29,7 +29,8 @@ module.exports = {
             'message': `You can go to /api/stock/add/${symbol} to request new data be added to database.`
           });
         } else {
-          res.redirect("/search").json(stockData);
+          // res.redirect("/search").json(stockData);
+          res.json(stockData)
         }
       })
       .catch(err => res.json(err));
