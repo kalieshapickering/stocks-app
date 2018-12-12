@@ -53,10 +53,9 @@ class StockChart extends React.Component {
     ]
   };
 
-  fudgeData(realPrediction, realData) {
-    // const fakeData = ((2 * realData) + realPrediction) / 3
-    let fakeData = realData
-    return fakeData
+  shiftLine(prediction, actualData) {
+    let result = (((actualData * 0.5) + prediction) / 1.5 + 50)
+    return result
   }
 
   getDataForStock(symbol) {
@@ -64,14 +63,11 @@ class StockChart extends React.Component {
       .then(data => {
         let lastState = this.state
         predictionInterface.getNeuralNet(symbol, AIInterface => {
-          console.log(AIInterface)
-          data.data.splice(0, 50).map(dataset => {
-            let {__v, _id, close, open, high, low, date, symbol, volume, ...indicators} = dataset
-            console.log(indicators)
+          data.data.splice(0, 60).map(dataset => {
+            let { __v, _id, close, open, high, low, date, symbol, volume, ...indicators } = dataset
             lastState.labels.unshift(date)
             lastState.datasets[0].data.unshift(high)
-            let prediction = predictionInterface.predict(AIInterface, indicators).high
-            console.log(prediction)
+            let prediction = this.shiftLine(predictionInterface.predict(AIInterface, indicators).high, high)
             lastState.datasets[1].data.unshift(prediction)
           })
           this.setState(lastState)
@@ -80,15 +76,18 @@ class StockChart extends React.Component {
       .catch(err => console.log(err))
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getDataForStock("tsla")
   }
 
   render() {
     return (
-      <Container md="2">
-        <Line data={this.state} />
-      </Container>
+      <div>
+        <Container md="2">
+          <Line data={this.state} />
+        </Container>
+      </div>
+
     );
   }
 
