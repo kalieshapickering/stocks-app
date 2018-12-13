@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import API from "../../utils/API";
-import { List, ListItem } from "../../components/List";
+import { List} from "../../components/List";
 import CommentPost from "../../components/CommentPost";
 
 class CommentSection extends Component {
@@ -10,7 +10,8 @@ class CommentSection extends Component {
     comments: [],
     name: "",
     email: "",
-    message: ""
+    message: "",
+    uuid: "",
 
   };
 
@@ -21,7 +22,7 @@ class CommentSection extends Component {
   // loadComments = () => {
   //   API.getComments()
   //     .then(res => 
-  //       this.setState({ comments: res.data, name: "", email: "", message: "" })
+  //       this.setState({ comments: res.data, name: "", email: "", message: "", uuid: "" })
   //     )
   //     .catch(err => console.log(err));
   // };
@@ -32,7 +33,8 @@ class CommentSection extends Component {
       API.postComments({
         name: this.state.name,
         email: this.state.email,
-        message: this.state.message
+        message: this.state.message,
+        uuid: this.state.uuid
       })
         // .then(res => this.loadComments())
         // this.loadComments()
@@ -98,7 +100,7 @@ class CommentSection extends Component {
             {this.state.comments.map(comment => {
               return (
                 <CommentPost key={comment._id}>
-                  <a href={"/api/comment/" + comment._id}>
+                  <a href={"/api/comment/" + comment.uuid}>
                     <strong>
                       {comment.message} by {comment.name}
                     </strong>

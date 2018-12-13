@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import StockChart from "../../components/StockChart";
 import { Card, Col, Row, ListGroup, ListGroupItem } from "mdbreact";
 import SearchResultContainer from "../../components/SearchResultContainer";
-import CommentSection from "../../components/CommentSection";
+// import CommentSection from "../../components/CommentSection";
 
 class SearchResultPage extends Component {
     render() {
         return (
             <div>
-                <h1>Stock Name</h1>
+                <h1>Stock Predictor</h1>
                 <Card>
                     <StockChart />
                 </Card>
@@ -19,18 +19,19 @@ class SearchResultPage extends Component {
                         {this.props.search && this.props.search.map(article => {
                             return (
                                 <SearchResultContainer
-                                    image={article.main_image}
+                                    image={article.thread.main_image}
                                     title={article.title}
                                     text={article.text}
                                     url={article.url}
                                     published={article.published}
+                                    alt ={article.entities.organizations.name}
                                 />
                             )
                         })
 
                         }
                     </Col>
-                    <Col md="4">
+                    {/* <Col md="4">
 
                         <Card>
                             <Card>
@@ -44,7 +45,7 @@ class SearchResultPage extends Component {
                                 <CommentSection />
                             </Card>
                         </Card>
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
         )

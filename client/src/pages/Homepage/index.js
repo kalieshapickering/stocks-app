@@ -21,12 +21,17 @@ class Homepage extends Component {
         }
         client.query('filterWebContent', query_params)
         .then(output => {
-            console.log(output['posts'][0]['text']); // Print the text of the first post
-            console.log(output['posts'][0]['published']); // Print the text of the first post publication date
+            console.log(output['posts'][0]['thread']['main_image'])
         console.log(output['posts']);
+        
         this.setState({newsArticles: output['posts']});
-        }); 
         console.log(this.state);
+        console.log(this.state.newsArticles["thread"]["main_image"]);
+        {output['post'].map(
+            console.log(["thread"]["main_image"])
+        )}
+        }); 
+    
     }
 
 
@@ -36,15 +41,17 @@ class Homepage extends Component {
     {/* <StockSlider /> */}
     <NewsHeader />
     <br></br>
+
     
       {this.state.newsArticles.map(article => {
 return(
     <NewsBody
-    image = {article.main_image}
-    title = {article.title}
-    text = {article.text}
-    url = {article.url}
-    published = {article.published}
+    image ={article.thread.main_image}
+    title ={article.title}
+    text ={article.text}
+    url ={article.url}
+    published ={article.published}
+    alt ={article.entities.organizations.name}
     />
 )
       }
