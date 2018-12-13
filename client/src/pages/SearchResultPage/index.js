@@ -8,6 +8,7 @@ class SearchResultPage extends Component {
     render() {
         return (
             <div>
+                <br></br>
                 <h1>Stock Predictor</h1>
                 <Card>
                     <StockChart />
@@ -15,7 +16,7 @@ class SearchResultPage extends Component {
 
                 <br></br>
                 <Row>
-                    <Col md="7">
+                    <Col>
                         {this.props.search && this.props.search.map(article => {
                             return (
                                 <SearchResultContainer
