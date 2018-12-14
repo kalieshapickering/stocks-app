@@ -34,12 +34,9 @@ class App extends Component {
     this.handlequery(query_params);
   }
   handlequery = query_params => {
-    const client = webhoseio.config({ token: 'bd6cde1b-cbe8-4ce2-aa82-73e6ddc91927' });
+    const client = webhoseio.config({ token: '724fb54d-a67d-47e3-9185-3853aed0bcc0' });
     client.query('filterWebContent', query_params)
       .then(output => {
-        console.log(output['posts'][0]['text']); // Print the text of the first post
-        console.log(output['posts'][0]['published']); // Print the text of the first post publication date
-        console.log(output['posts']);
         this.setState({ searchResult: output['posts'] });
       });
   }

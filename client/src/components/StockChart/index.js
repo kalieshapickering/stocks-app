@@ -54,7 +54,7 @@ class StockChart extends React.Component {
   };
 
   shiftLine(prediction, actualData) {
-    let result = (((actualData * 0.5) + prediction) / 1.5 + 50)
+    let result = Math.sqrt(Math.pow(prediction, 2) + Math.pow(actualData, 1.95))
     return result
   }
 
