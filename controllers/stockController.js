@@ -1,5 +1,6 @@
 const db = require("../models");
-const alpha = require('alphavantage')({ key: process.env.ALPHA_ADVANTAGE_KEY });
+console.log(process.env.ALPHAVANTAGE_KEY)
+const alpha = require('alphavantage')({ key: process.env.ALPHAVANTAGE_KEY });
 // * BEGIN MODULE.EXPORTS API ROUTES *
 module.exports = {
 
@@ -99,7 +100,8 @@ getTechnicalIndicator = (
         queryOptions.push(type);
       }
     }
-
+    console.log(queryOptions)
+    console.log(technicalIndicator)
     alpha.technical
     [technicalIndicator](...queryOptions) //(symbol, 'daily', 60, type)
       .then(data => {

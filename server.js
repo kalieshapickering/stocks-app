@@ -1,10 +1,10 @@
+require("dotenv").config()
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
 const routes = require('./routes');
-require("dotenv").config()
 // connect Mongoose
 mongoose.connect("mongodb://localhost/newsStocksDB", { useNewUrlParser: true });
 
@@ -27,4 +27,5 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
+  console.log(process.env.ALPHA_ADVANTAGE_KEY)
 });
