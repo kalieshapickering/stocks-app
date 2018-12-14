@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import StockChart from "../../components/StockChart";
-import { Card, Col, Row, ListGroup, ListGroupItem } from "mdbreact";
+import { Card, Col, Row } from "mdbreact";
 import SearchResultContainer from "../../components/SearchResultContainer";
 // import CommentSection from "../../components/CommentSection";
 
@@ -32,21 +32,6 @@ class SearchResultPage extends Component {
 
                         }
                     </Col>
-                    {/* <Col md="4">
-
-                        <Card>
-                            <Card>
-                                <ListGroup>
-                                    <ListGroupItem>
-                                        Dummy content
-                </ListGroupItem>
-                                </ListGroup>
-                            </Card>
-                            <Card>
-                                <CommentSection />
-                            </Card>
-                        </Card>
-                    </Col> */}
                 </Row>
             </div>
         )

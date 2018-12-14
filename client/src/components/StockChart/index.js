@@ -63,6 +63,7 @@ class StockChart extends React.Component {
       .then(data => {
         let lastState = this.state
         predictionInterface.getNeuralNet(symbol, AIInterface => {
+          // eslint-disable-next-line
           data.data.splice(0, 60).map(dataset => {
             let { __v, _id, close, open, high, low, date, symbol, volume, ...indicators } = dataset
             lastState.labels.unshift(date)
