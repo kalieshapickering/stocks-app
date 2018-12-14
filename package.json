@@ -15,12 +15,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.9"
   },
   "dependencies": {
     "alphavantage": "^1.2.0",
     "axios": "^0.18.0",
+    "babel-preset-env": "^1.7.0",
     "brain.js": "^1.6.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
