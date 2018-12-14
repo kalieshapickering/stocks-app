@@ -1,6 +1,5 @@
 const db = require("../models");
-const alpha = require('alphavantage')({ key: 'N0P025QLK3BB7DUQ' });
-
+const alpha = require('alphavantage')({ key: process.env.ALPHA_ADVANTAGE_KEY });
 // * BEGIN MODULE.EXPORTS API ROUTES *
 module.exports = {
 
