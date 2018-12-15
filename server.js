@@ -14,8 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve up static assets (usually on heroku)
+console.log(`NODE_ENV is ${process.env.NODE_ENV}`)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+  app.use("/static", express.static(path.join(__dirname, "client/build")));
 }
 
 // Make Public a static folder
