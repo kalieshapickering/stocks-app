@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const routes = require('./routes');
 // connect Mongoose
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsStocksDB";
 mongoose.connect("mongodb://localhost/newsStocksDB", { useNewUrlParser: true });
 
 // Define middleware here
