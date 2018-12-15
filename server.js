@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Make Public a static folder
 app.get('/', function(req, res) {
-  res.sendfile(path.resolve(__dirname, 'public', 'index.html'));
+  res.sendfile(path.join(__dirname, 'client', 'public', 'index.html'));
 }); 
 
 // use route file
@@ -22,7 +22,7 @@ app.use(routes);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build/index.html"));
+  app.use(express.static("client/build"));
 }
 
 app.listen(PORT, () => {
