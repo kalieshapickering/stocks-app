@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
 // Make Public a static folder
 app.get('/', function(req, res) {
   console.log("Root route attempted connection")
-  res.sendfile(path.join(__dirname, 'client', 'public'));
+  res.sendfile(path.join(__dirname, 'client', 'public', 'index.html'));
 }); 
 
 // use route file
