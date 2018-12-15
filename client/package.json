@@ -97,5 +97,8 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "devDependencies": {}
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.5.0"
+  }
 }
