@@ -12,6 +12,11 @@ mongoose.connect("mongodb://localhost/newsStocksDB", { useNewUrlParser: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Make Public a static folder
 app.get('/', function(req, res) {
   res.sendfile(path.join(__dirname, 'client', 'public', 'index.html'));
@@ -19,11 +24,6 @@ app.get('/', function(req, res) {
 
 // use route file
 app.use(routes);
-
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
