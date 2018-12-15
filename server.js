@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const routes = require('./routes');
 // connect Mongoose
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsStocksDB";
-mongoose.connect("mongodb://localhost/newsStocksDB", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
