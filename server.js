@@ -13,20 +13,19 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// use route file
+app.use(routes);
+
 // Serve up static assets (usually on heroku)
 console.log(`NODE_ENV is ${process.env.NODE_ENV}`)
 if (process.env.NODE_ENV === "production") {
-  app.use("/static", express.static(path.join(__dirname, "client/build")));
+  app.use('/static', express.static(path.join(__dirname, 'client/build')));
 }
 
 // Make Public a static folder
 app.get('/', function(req, res) {
-  console.log("Root route attempted connection")
-  res.sendfile(path.join(__dirname, 'client', 'public', 'index.html'));
+  res.sendfile(path.join(__dirname, 'client', 'public'));
 }); 
-
-// use route file
-app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
