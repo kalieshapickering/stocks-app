@@ -1,5 +1,4 @@
 const db = require("../models");
-console.log(process.env.ALPHAVANTAGE_KEY)
 const alpha = require('alphavantage')({ key: process.env.ALPHAVANTAGE_KEY });
 // * BEGIN MODULE.EXPORTS API ROUTES *
 module.exports = {
@@ -39,7 +38,7 @@ module.exports = {
 
 // * END MODULE.EXPORTS API ROUTES *
 
-getStockPrices = (symbol, res) => {
+const getStockPrices = (symbol, res) => {
   alpha.data
     .daily(symbol.toUpperCase(), 'full')
     .then(data => {
@@ -79,7 +78,7 @@ getStockPrices = (symbol, res) => {
     .catch(err => console.log(`Error caught: ${err}`));
 };
 
-getTechnicalIndicator = (
+const getTechnicalIndicator = (
   symbol,
   seriesTypeArray,
   technicalIndicator,

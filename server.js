@@ -27,5 +27,4 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
-  console.log(process.env.ALPHA_ADVANTAGE_KEY)
 });

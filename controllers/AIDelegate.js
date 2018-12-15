@@ -3,7 +3,7 @@ const brain = require("brain.js")
 
 const intervals = ['open', 'high', 'low', 'close']
 
-normalizeData = data => {
+const normalizeData = data => {
     standardDeviation = values => {
         const avg = average(values)
 
