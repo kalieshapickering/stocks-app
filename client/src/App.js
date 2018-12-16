@@ -50,6 +50,7 @@ class App extends Component {
     this.handlequery(query_params);
   }
   render() {
+    console.log(process.env.PUBLIC_URL)
     return (
       <Router>
         <div>
