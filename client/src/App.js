@@ -50,7 +50,6 @@ class App extends Component {
     this.handlequery(query_params);
   }
   render() {
-    console.log(process.env.PUBLIC_URL)
     return (
       <Router>
         <div>
@@ -60,7 +59,7 @@ class App extends Component {
             <Route exact path="/homepage" component={Homepage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/search" render={(props) => <SearchResultPage search={this.state.searchResult} />} />
+            <Route exact path="/search" render={() => <SearchResultPage search={this.state.searchResult} />} />
 
           </Switch>
         </div>
