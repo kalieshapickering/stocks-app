@@ -36,7 +36,7 @@ class Homepage extends Component {
                 <br></br>
 
 
-                {this.state.newsArticles.map(article => {
+                {this.state.newsArticles.map((article, index) => {
                     return (
                         <NewsBody
                             image={article.thread.main_image}
@@ -45,6 +45,7 @@ class Homepage extends Component {
                             url={article.url}
                             published={article.published}
                             alt={article.entities.organizations.name}
+                            key={`body${index}`}
                         />
                     )
                 }
