@@ -32,7 +32,6 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
-    "mdbreact": "^4.8.5-patch.1",
     "mongoose": "^5.4.0",
     "newsapi": "^2.4.0",
     "request": "^2.88.0",
